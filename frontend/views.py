@@ -31,9 +31,9 @@ def contact(request):
     
     return render(request, 'frontend/contact.html')
 
-def login(request):
+# def login(request):
     
-    return render(request, 'frontend/login.html')
+#     return render(request, 'frontend/login.html')
 
 def signup(request):
     

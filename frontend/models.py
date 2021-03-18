@@ -10,12 +10,13 @@ class UserInfo(models.Model):
 
 
 class UserProfile(models.Model):
-    age = models.PositiveIntegerField()
-    website = models.URLField(blank=True, null=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user   = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(null=True, verbose_name='Profile Image', blank=True, upload_to='uploads/')
 
     def __str__(self):
         return self.user.username
+
+
 
 class Category(models.Model):
     cat_name = models.CharField(max_length=100, verbose_name='Category Name')

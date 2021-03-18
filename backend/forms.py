@@ -16,7 +16,6 @@ class RegisterForm(UserCreationForm):
         attrs={'class': 'form-control', 'placeholder': 'Enter Firstname'}))
     last_name = forms.CharField(required=False, widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Enter Lastname'}))
-    
     password1 = forms.CharField(label='Enter Password*', widget=forms.PasswordInput(
         attrs={'class': 'form-control', 'placeholder': 'Enter Password'}))
     password2 = forms.CharField(label='Confirm Password*', widget=forms.PasswordInput(
@@ -45,6 +44,12 @@ class RegisterForm(UserCreationForm):
         if commit:
             user.save()
             return user
+
+class ImageUploadForm(forms.Form):
+    profile_photo = forms.ImageField()
+
+    class Meta():
+        model = UserProfile
 
 
 class CategoryForm(forms.ModelForm):

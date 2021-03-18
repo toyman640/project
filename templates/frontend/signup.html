@@ -55,7 +55,7 @@
                     {% endfor %}
                     <li><a href="{% url 'frontend:about' %}">About</a></li>
                     <li><a href="{% url 'frontend:contact' %}">Contact</a></li>
-                    <li><a href="{% url 'frontend:login' %}">Login</a></li>
+                    <li><a href="{% url 'backend:login_view' %}">Login</a></li>
                   </ul>
                   
                 </nav>
@@ -75,39 +75,44 @@
         </div>
       </div>
     </div>
-    <div class="d-md-flex half">
-      <div class="bg" style="background-image: url({% static 'frontend/images/th1.jpg' %});"></div>
-      <div class="contents">
-
-        <div class="container">
-          <div class="row align-items-center justify-content-center">
-            <div class="col-md-12">
-              <div class="form-block mx-auto">
-                <div class="text-center mb-5">
-                <div class="row login-logo">
-                  <a href="{% url 'index' %}"><img src="{% static 'frontend/images/loc.png' %}"></a>
+    <div class="container">
+     
+      <div class="d-md-flex half">
+        <div class="bg" style="background-image: url({% static 'frontend/images/th1.jpg' %});"></div>
+        <div class="contents">
+  
+          <div class="container">
+            <div class="row align-items-center justify-content-center">
+              <div class="col-md-12">
+                <div class="form-block mx-auto">
+                  <div class="text-center mb-5">
+                  <div class="row login-logo">
+                    <a href="{% url 'index' %}"><img src="{% static 'frontend/images/loc.png' %}"></a>
+                  </div>
+                  </div>
+                    <form class="form" method="post">
+                        {{ reg }}
+                        {{ photo.as_p }}
+  
+                        {% csrf_token %}
+                        <input type="submit" value="Sign up">
+                    </form>
+                    <!-- <form action="" method="POST">
+                        {{ cat }}
+  
+                        {% csrf_token %}
+                        <input type="submit" value="Send">
+                    </form> -->
                 </div>
-                </div>
-                  <form class="form" method="post">
-                      {{ reg }}
-
-                      {% csrf_token %}
-                      <input type="submit" value="Sign up">
-                  </form>
-                  <!-- <form action="" method="POST">
-                      {{ cat }}
-
-                      {% csrf_token %}
-                      <input type="submit" value="Send">
-                  </form> -->
               </div>
             </div>
           </div>
         </div>
+  
+        
       </div>
-
-      
     </div>
+  
     <script src="{% static 'frontend/js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'frontend/js/popper.min.js' %}"></script>
     <script src="{% static 'frontend/js/bootstrap.min.js' %}"></script>
