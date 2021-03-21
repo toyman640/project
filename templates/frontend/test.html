@@ -1,16 +1,101 @@
-{% load static %}
-
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'frontend/fonts/icomoon/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'frontend/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/mediaelementplayer.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/fonts/flaticon/font/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/fl-bigmug-line.css' %}">
+    
+  
+    <link rel="stylesheet" href="{% static 'frontend/css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'frontend/css/style.css' %}">
 </head>
 <body>
-    <form action="">
-        {{ form_key }}
-    </form>
+  <div>
+    <div class="site-navbar mt-4 bg-dark mt-0">
+      <div class="container py-1">
+        <div class="row align-items-center">
+          <div class="col-8 col-md-8 col-lg-4">
+            <h1 class="mb-0"><a href="index.html" class="text-white h2 mb-0"><strong>Homeland<span class="text-danger">.</span></strong></a></h1>
+          </div>
+          <div class="col-4 col-md-4 col-lg-8">
+            <nav class="site-navigation text-right text-md-right" role="navigation">
+
+              <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
+
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+                <li class="active">
+                  <a href="{% url 'index' %}">Home</a>
+                </li>
+                <!-- <li><a href="{% url 'frontend:buy' %}">Buy</a></li>
+                <li><a href="{% url 'frontend:rent' %}">Rent</a></li> -->
+                <!-- {% for cat in category %}
+                  <li><a href="{% url 'frontend:post_from_cat' cat.id %}">{{ cat.cat_name }}</a></li>
+                {% endfor %} -->
+                
+                <!-- <li><a href="{% url 'frontend:about' %}">About</a></li> -->
+                <!-- <li><a href="{% url 'frontend:contact' %}">Contact</a></li> -->
+                <!-- <li><a href="{% url 'backend:login_view' %}">Login</a></li> -->
+                <li class="text-white">Welcome, {{ request.user.get_full_name }}</li>
+                <li><a href="{% url 'backend:login_view' %}">Log out</a></li>
+                <li><img src="" alt=""></li>
+              </ul>
+            </nav>
+          </div>
+         
+
+        </div>
+      </div>
+    </div>
+      
+    </div>
+    
+</div>
+    
+<!-- main content -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 mt-5">
+      <div class="col-4 bg-secondary">
+        <ul>
+          <li>New Post</li>
+          <li>Edit Post</li>
+          <li>Edit Profile</li>
+          <li>Change Password</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+            <script src="{% static 'frontend/js/jquery-3.3.1.min.js' %}"></script>
+            <script src="{% static 'frontend/js/jquery-migrate-3.0.1.min.js' %}"></script>
+            <script src="{% static 'frontend/js/jquery-ui.js' %}"></script>
+            <script src="{% static 'frontend/js/popper.min.js' %}"></script>
+            <script src="{% static 'frontend/js/bootstrap.min.js' %}"></script>
+            <script src="{% static 'frontend/js/owl.carousel.min.js' %}"></script>
+            <script src="{% static 'frontend/js/mediaelement-and-player.min.js' %}"></script>
+            <script src="{% static 'frontend/js/jquery.stellar.min.js' %}"></script>
+            <script src="{% static 'frontend/js/jquery.countdown.min.js' %}"></script>
+            <script src="{% static 'frontend/js/jquery.magnific-popup.min.js' %}"></script>
+            <script src="{% static 'frontend/js/bootstrap-datepicker.min.js' %}"></script>
+            <script src="{% static 'frontend/js/aos.js' %}"></script>
+          
+            <script src="{% static 'frontend/js/main.js' %}"></script>
 </body>
 </html>
