@@ -53,9 +53,6 @@ def post_from_cat(request, category_id):
     context = {'posts': post_cat, 'counts': count_post, 'cat': get_cat_name}
     return render(request, 'frontend/post.html', context)
 
-def post_detail(request, all_id):
-    try:
-        post = PostPage.objects.get(id=all_id)
-    except ObjectDoesNotExist:
-        return render(request, 'frontend/404.html')
-    return render(request, 'frontend/property-details.html')
+def post_detail(request, abt_id):
+    post = PostPage.objects.get(id=abt_id)
+    return render(request, 'frontend/property-details.html', {'post':post})

@@ -11,6 +11,6 @@ urlpatterns = [
     path('signup-page', views.signup, name='signup'),
     # path('base-page', views.category, name='category'),
     path('post-cat/<int:category_id>', views.post_from_cat, name='post_from_cat'),
-    path('degail-page/<int:all_id>', views.post_detail, name='post_detail')
+    path('detail-page/<int:abt_id>', views.post_detail, name='post_detail')
     
 ]

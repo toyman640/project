@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class UserInfo(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100, verbose_name='Email')
     last_name = models.CharField(max_length=100, verbose_name='Email')
     email = models.CharField(max_length=100, verbose_name='Email')
@@ -38,6 +39,7 @@ class PostPage(models.Model):
     pst_image5 = models.ImageField(null=True, verbose_name='Image5', blank=True, upload_to='uploads/')
     pst_title = models.CharField(max_length=150, verbose_name='House type')
     pst_description = models.TextField(max_length=350, verbose_name='Description')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     price = models.IntegerField(verbose_name='Price')
     room =  models.IntegerField(verbose_name='Rooms')
     bath = models.IntegerField( null=True, verbose_name='Bathrooms')
@@ -50,6 +52,22 @@ class PostPage(models.Model):
     class Meta():
         verbose_name_plural = 'Post'
 
-    def post_img(self):
+    def post_img1(self):
         if self.pst_image1:
           return self.pst_image1.url
+
+    def post_img2(self):
+        if self.pst_image1:
+          return self.pst_image2.url
+
+    def post_img3(self):
+        if self.pst_image1:
+          return self.pst_image3.url
+
+    def post_img4(self):
+        if self.pst_image1:
+          return self.pst_image4.url
+
+    def post_img5(self):
+        if self.pst_image1:
+          return self.pst_image5.url

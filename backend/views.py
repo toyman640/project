@@ -11,31 +11,14 @@ from django.contrib.auth import update_session_auth_hash
 def register_form(request):
     if request.method == 'POST':
         register_form = RegisterForm(request.POST)
-        photo_upload_form = ImageUploadForm(request.POST)
         if register_form.is_valid():
             register_form.save()
-            messages.success(request, 'User Registered')
-            username = register_form.cleaned_data['username']
-            password = register_form.cleaned_data['password1']
-            user = authenticate(username=username, password=password)
-            login(request,user)
-            return redirect('backend:register_form')
-
-        if photo_upload_form.is_valid():
-            user = username
-            avatar = photo_upload_form.cleaned_data.get("profile_photo")
-            new_user_profile = StudentProfile.objects.create(user, avatar)
-            
+            # messages.success(request, 'Succesfully Registered')
+            return redirect('backend:login_view')
     else:
-        register_form = RegisterForm()
-        photo_upload_form = ImageUploadForm()
-
-
-    context = {
-        "reg": register_form,
-        "photo": photo_upload_form
-        }
-    return render(request, 'frontend/signup.html', context)
+        register_form = RegisterForm() 
+        
+    return render(request, 'frontend/signup.html', {'reg': register_form})
 
 def category_form(request):
     if request.method=='POST':
@@ -52,7 +35,7 @@ def contact(request):
     my_form = FormName()
     return render(request, 'frontend/test.html', {'form_key': my_form})
 
-@login_required(login_url='/dashboard/')
+# @login_required(login_url='/backend/')
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -74,3 +57,34 @@ def dashboard(request):
 def logout_view(request):
     logout(request)
     return redirect('backend:login_view')
+
+@login_required(login_url='/backend/login')
+def viewPost(request):
+    prop = PostPage.objects.filter(user=request.user)
+    cat = Category.objects.all()
+    return render(request, 'backend/viewposts.html', {'view':prop, 'cat':cat})
+
+def detailView(request):
+    detail = PostPage.objects.all()
+    return render (request, 'backend/detailview.html', {'det':detail})
+
+def edit_newlisting(request, post_id):
+    single_post = get_object_or_404(PostPage, id=post_id)
+    if request.method == 'POST':
+        post_form = EditListing(request.POST, request.FILES, instance=single_post)
+        if post_form.is_valid():
+            listf = post_form.save(commit=False)
+            listf.user = request.user
+            listf.save()
+            # messages.success(request, 'Hotel Posted')
+            
+    else:
+        post_form = ListingForm(instance=single_post)
+    return render(request, 'backend/edit_post.html', {'editf': post_form})
+
+
+def dashboard(request):
+    return render(request, 'backend/dashboard.html')
+
+def newPost(request):
+    return render(request, 'backend/newpost.html')
