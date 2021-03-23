@@ -79,3 +79,27 @@ class FormName(forms.Form):
     name = forms.CharField()
     email = forms.EmailField()
     text = forms.CharField(widget=forms.Textarea)
+
+
+class EditListing(forms.ModelForm):
+
+    class Meta():
+        model = PostPage
+        exclude = ['date', 'user']
+
+        widget = { 
+            'pst_image1': forms.FileInput(attrs={'class': 'form-control'}),
+            'pst_image2': forms.FileInput(attrs={'class': 'form-control'}),
+            'pst_image3': forms.FileInput(attrs={'class': 'form-control'}),
+            'pst_image4': forms.FileInput(attrs={'class': 'form-control'}),
+            'pst_image5': forms.FileInput(attrs={'class': 'form-control'}),
+            'pst_title': forms.TextInput(attrs={'class': 'form-control'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'pst_desription': forms.Textarea(attrs={'class': 'form-control'}),
+            'toilet': forms.NumberInput(attrs={'class': 'form-control'}),
+            'bath': forms.NumberInput(attrs={'class': 'form-control'}),
+            'room': forms.NumberInput(attrs={'class': 'form-control'}),
+            'cat_id' : forms.Select(attrs={'class': 'form-control'}),
+            
+            
+        }

@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 
 class UserInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=100, verbose_name='Email')
-    last_name = models.CharField(max_length=100, verbose_name='Email')
+    first_name = models.CharField(max_length=100, verbose_name='First name')
+    last_name = models.CharField(max_length=100, verbose_name='Last name')
     email = models.CharField(max_length=100, verbose_name='Email')
     p_img = models.ImageField(null=True, verbose_name='Profile Image', blank=True, upload_to='uploads/')
 
@@ -16,6 +16,10 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def pst_img(self):
+        if self.avatar:
+          return self.avatar.url
 
 
 

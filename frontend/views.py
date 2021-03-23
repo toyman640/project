@@ -56,3 +56,4 @@ def post_from_cat(request, category_id):
 def post_detail(request, abt_id):
     post = PostPage.objects.get(id=abt_id)
     return render(request, 'frontend/property-details.html', {'post':post})
+    

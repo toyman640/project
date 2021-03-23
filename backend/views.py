@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
-
+from django.contrib.auth.models import User
+from frontend.models import *
 
 # Create your views here.
 def register_form(request):
@@ -64,11 +65,11 @@ def viewPost(request):
     cat = Category.objects.all()
     return render(request, 'backend/viewposts.html', {'view':prop, 'cat':cat})
 
-def detailView(request):
-    detail = PostPage.objects.all()
+def detailView(request, abt_id):
+    detail = PostPage.objects.get(id=abt_id)
     return render (request, 'backend/detailview.html', {'det':detail})
 
-def edit_newlisting(request, post_id):
+def editPost(request, post_id):
     single_post = get_object_or_404(PostPage, id=post_id)
     if request.method == 'POST':
         post_form = EditListing(request.POST, request.FILES, instance=single_post)
@@ -88,3 +89,8 @@ def dashboard(request):
 
 def newPost(request):
     return render(request, 'backend/newpost.html')
+
+def viewProfile(request):
+    profile = UserInfo.objects.filter(user=request.user)
+    img =  UserProfile.objects.all()
+    return render(request, 'backend/viewprofile.html',{'profile':profile, 'img':img})

@@ -12,6 +12,8 @@ urlpatterns = [
     path('logout_view-page/', views.logout_view, name='logout_view'),
     path('view-post/', views.viewPost, name='viewPost'),
     path('dashboard/', views.dashboard, name='dashboard',),
-    path('deatilview-page/', views.detailView, name='detailView'),
+    path('detailview-page/<int:abt_id>', views.detailView, name='detailView'),
     path('newpost-page/', views.newPost, name='newPost'),
+    path('viewprofile-page/', views.viewProfile, name='viewProfile'),
+    path('listings-page/<int:post_id>', views.editPost, name=' editPost'),
 ]
