@@ -13,7 +13,7 @@ urlpatterns = [
     path('view-post/', views.viewPost, name='viewPost'),
     path('dashboard/', views.dashboard, name='dashboard',),
     path('detailview-page/<int:abt_id>', views.detailView, name='detailView'),
-    path('newpost-page/', views.newPost, name='newPost'),
+    path('newpost-page/', views.addProp, name='addProp'),
     path('viewprofile-page/', views.viewProfile, name='viewProfile'),
-    path('listings-page/<int:post_id>', views.editPost, name=' editPost'),
+    path('editpost-page/<int:blog_id>', views.postEdit, name='postEdit'),
 ]

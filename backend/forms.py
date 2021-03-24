@@ -103,3 +103,11 @@ class EditListing(forms.ModelForm):
             
             
         }
+
+class NewPost(forms.ModelForm):
+    class Meta():
+        model = PostPage
+        exclude = ['user']
+        widget = {
+            'pst_description': forms.Textarea(attrs={'class': 'form-control'}),
+        }

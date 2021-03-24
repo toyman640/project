@@ -69,19 +69,18 @@ def detailView(request, abt_id):
     detail = PostPage.objects.get(id=abt_id)
     return render (request, 'backend/detailview.html', {'det':detail})
 
-def editPost(request, post_id):
-    single_post = get_object_or_404(PostPage, id=post_id)
+def postEdit(request, blog_id):
+    single_blog = get_object_or_404(PostPage, id=blog_id)
     if request.method == 'POST':
-        post_form = EditListing(request.POST, request.FILES, instance=single_post)
-        if post_form.is_valid():
-            listf = post_form.save(commit=False)
-            listf.user = request.user
-            listf.save()
-            # messages.success(request, 'Hotel Posted')
-            
+        edit_form = EditListing(request.POST, request.FILES, instance=single_blog)
+        if edit_form.is_valid():
+            blogf = edit_form.save(commit=False)
+            blogf.user = request.user
+            blogf.save()
+            # messages.success(request, 'User edited successfully.')
     else:
-        post_form = ListingForm(instance=single_post)
-    return render(request, 'backend/edit_post.html', {'editf': post_form})
+        edit_form = EditListing(instance=single_blog)
+    return render(request, 'backend/edit_post.html', {'edit_key':edit_form})
 
 
 def dashboard(request):
@@ -94,3 +93,16 @@ def viewProfile(request):
     profile = UserInfo.objects.filter(user=request.user)
     img =  UserProfile.objects.all()
     return render(request, 'backend/viewprofile.html',{'profile':profile, 'img':img})
+
+def addProp(request):
+    if request.method == 'POST':
+        list_form = NewPost(request.POST, request.FILES)
+        if list_form.is_valid():
+            prop = list_form.save(commit=False)
+            prop.user = request.user
+            prop.save()
+            # messages.success(request, 'Hotel Posted')
+            
+    else:
+        list_form = NewPost()
+    return render(request, 'backend/newpost.html', {'prop': list_form})

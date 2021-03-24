@@ -14,7 +14,7 @@ Admin
         <li class="breadcrumb-item">
           <a href="#">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">View Product</li>
+        <li class="breadcrumb-item active">View Property</li>
       </ol>
 	  <!-- Icon Cards-->
       
@@ -40,13 +40,13 @@ Admin
                             {{ a.pst_description|truncatewords:10 }}
                         </td>
                         <td>
-                            <a href="{% url 'backend:editPost' a.id %}">
+                            <a href="{% url 'backend:postEdit' a.id %}">
                             <span class="fa fa-pencil"></span>
                             Edit
                             </a>
                         </td>
                         <td>
-                            <a href="{% url 'backend:detailView' id %}">
+                            <a href="{% url 'backend:detailView' a.id %}">
                             <span class="fa fa-eye"></span>
                             View
                             </a>

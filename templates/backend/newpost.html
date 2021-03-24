@@ -21,11 +21,11 @@ Admin
 		<!-- /cards -->
 		<h2></h2>
 		<div class="box_general padding_bottom">
-			<p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta saepe temporibus non quam nostrum? Necessitatibus, iste natus excepturi in architecto corrupti eum repellendus magnam esse atque. Earum sapiente saepe aliquid!
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex consectetur voluptatem blanditiis ducimus similique eveniet voluptate veritatis, omnis facere eos adipisci labore voluptates dolores? Culpa earum illum totam excepturi quam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni esse obcaecati quos eius modi molestiae nobis deserunt, sunt neque ullam magnam. Eius dolores architecto sapiente officia ut, doloremque accusantium eligendi.
-            </p>
+        <form method="post">
+          {{ prop.as_p }}
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Save</button>
+        </form>
 		</div>
 	  </div>
 	  <!-- /.container-fluid-->

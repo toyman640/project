@@ -23,7 +23,7 @@ Admin
 		<div class="box_general padding_bottom">
 			<div  class="form-group col-lg-6">
                 <form method="post" enctype="multipart/form-data">
-                    {{ editf.as_p }}
+                    {{ edit_key.as_p }}
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">Save</button>
                 </form>
