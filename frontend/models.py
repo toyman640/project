@@ -48,7 +48,7 @@ class PostPage(models.Model):
     room =  models.IntegerField(verbose_name='Rooms')
     bath = models.IntegerField( null=True, verbose_name='Bathrooms')
     toilet = models.IntegerField( null=True, verbose_name='Toilet')
-    cat_id = models.ManyToManyField(Category, verbose_name='Offer type')
+    category = models.ManyToManyField(Category, verbose_name='Offer type')
 
     def __str__(self):
         return self.pst_title

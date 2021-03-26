@@ -7,15 +7,7 @@ Admin
 
 {% block content %}
   <!-- /Navigation -->
-  <div class="content-wrapper">
-    <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
-        </li>
-        <li class="breadcrumb-item active">My Dashboard</li>
-      </ol>
+  
 	  <!-- Icon Cards-->
       
 		<!-- /cards -->
@@ -84,6 +76,7 @@ Admin
                                             <label>Personal info</label>
                                             <p>My name is {{ user.first_name }} {{ user.last_name }}. This is my Dashboard.</p>
                                         </div>
+                                        <button class="btn btn-dark"> <a href="{% url 'backend:editUser' %}" class="text-white">Edit</a></button>
                                     </div>
                                 </div>
                                 <!-- /row-->

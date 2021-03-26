@@ -4,6 +4,7 @@ from django.core import validators
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 
@@ -107,7 +108,29 @@ class EditListing(forms.ModelForm):
 class NewPost(forms.ModelForm):
     class Meta():
         model = PostPage
-        exclude = ['user']
-        widget = {
-            'pst_description': forms.Textarea(attrs={'class': 'form-control'}),
-        }
+        exclude = ['user', 'm2mthroughfield']
+        
+
+class UserEdit(forms.ModelForm):
+    class Meta():
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email')
+
+
+class PasswordChangeForm(PasswordChangeForm):
+    botfield = forms.CharField(required=False, widget=forms.HiddenInput(),
+                               validators=[validators.MaxLengthValidator(0)])
+
+    class Meta():
+        model = User
+        fields = ['password1', 'password2']
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.password1 = self.cleaned_data['password1']
+        user.password2 = self.cleaned_data['password2']
+        
+        if commit:
+            user.save()
+            return user
+

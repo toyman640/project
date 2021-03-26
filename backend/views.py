@@ -65,10 +65,12 @@ def viewPost(request):
     cat = Category.objects.all()
     return render(request, 'backend/viewposts.html', {'view':prop, 'cat':cat})
 
+@login_required(login_url='/backend/login')
 def detailView(request, abt_id):
     detail = PostPage.objects.get(id=abt_id)
     return render (request, 'backend/detailview.html', {'det':detail})
 
+@login_required(login_url='/backend/login')
 def postEdit(request, blog_id):
     single_blog = get_object_or_404(PostPage, id=blog_id)
     if request.method == 'POST':
@@ -77,23 +79,27 @@ def postEdit(request, blog_id):
             blogf = edit_form.save(commit=False)
             blogf.user = request.user
             blogf.save()
+            edit_form.save_m2m()
             # messages.success(request, 'User edited successfully.')
     else:
         edit_form = EditListing(instance=single_blog)
     return render(request, 'backend/edit_post.html', {'edit_key':edit_form})
 
-
+@login_required(login_url='/backend/login')
 def dashboard(request):
     return render(request, 'backend/dashboard.html')
 
+@login_required(login_url='/backend/login')
 def newPost(request):
     return render(request, 'backend/newpost.html')
 
+@login_required(login_url='/backend/login')
 def viewProfile(request):
     profile = UserInfo.objects.filter(user=request.user)
     img =  UserProfile.objects.all()
     return render(request, 'backend/viewprofile.html',{'profile':profile, 'img':img})
 
+@login_required(login_url='/backend/login')
 def addProp(request):
     if request.method == 'POST':
         list_form = NewPost(request.POST, request.FILES)
@@ -101,8 +107,39 @@ def addProp(request):
             prop = list_form.save(commit=False)
             prop.user = request.user
             prop.save()
+            list_form.save_m2m()
             # messages.success(request, 'Hotel Posted')
+            # return redirect('backend:addProp')
             
     else:
         list_form = NewPost()
     return render(request, 'backend/newpost.html', {'prop': list_form})
+
+@login_required(login_url='/backend/login')
+def editUser(request):
+    if request.method == 'POST':
+        edit_form = UserEdit(request.POST, instance=request.user)
+        if edit_form.is_valid():
+            edit_form.save()
+            # messages.success(request, 'User edited successfully.')
+    else:
+        edit_form = UserEdit(instance=request.user)
+    return render(request, 'backend/edit-profile.html', {'edit_key':edit_form})
+
+@login_required(login_url='/backend/login')
+def changePwrd(request):
+    if request.method == 'POST':
+        pass_form = PasswordChangeForm(data=request.POST,
+        user=request.user)
+        if pass_form.is_valid():
+            pass_form.save()
+            update_session_auth_hash(request, pass_form.user)
+            # messages.success(request, 'Password changed successfully.')
+    else:
+        pass_form = PasswordChangeForm(user=request.user)
+    return render(request, 'backend/reset.html', {'pass_key':pass_form})
+
+def delete_post(request, listf_id):
+    post_record = get_object_or_404(PostPage, id=listf_id)
+    post_record.delete()
+    return redirect('backend:viewPost')

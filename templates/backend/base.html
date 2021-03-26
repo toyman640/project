@@ -72,20 +72,11 @@
           </a>
         </li>
 		    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Messages">
-          <a class="nav-link" href="messages.html">
-            <i class="fa fa-fw fa-envelope-open"></i>
+          <a class="nav-link" href="{% url 'backend:viewPost' %}">
+            <i class="fa fa-list-alt"></i>
             <span class="nav-link-text">View Properties</span>
           </a>
         </li>
-		    
-		    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My listings">
-          <a class="nav-link" href="{% url 'backend:viewPost' %}">
-            <span>My listings</span>
-          </a>
-          
-        </li>
-		    
-		    
 		    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add listing">
           <a class="nav-link" href="{% url 'backend:addProp' %}">
             <i class="fa fa-fw fa-plus-circle"></i>
@@ -99,18 +90,14 @@
           </a>
         </li>
 		  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#Components">
+          <a class="nav-link  "  href="{% url 'backend:changePwrd' %}" data-parent="#Components">
             <i class="fa fa-fw fa-gear"></i>
             <span class="nav-link-text">Change password</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li>
-              <a href="charts.html">Charts</a>
-            </li>
+            
 			<li>
-              <a href="tables.html">Tables</a>
-            </li>
-          </ul>
+        
+         
         </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
@@ -143,7 +130,7 @@
  <footer class="sticky-footer">
     <div class="container">
       <div class="text-center">
-        <small>Copyright © PANAGEA 2018</small>
+        <small>Copyright © Homeland 2018</small>
       </div>
     </div>
   </footer>

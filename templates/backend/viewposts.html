@@ -35,7 +35,9 @@ Admin
                     <tr>
                         <td>{{ a.pst_title }}</td>
                         <td>{{ a.price }}</td>
-                        <td>{{ a.cat_id }}</td>
+                        {% for c in a.category.all %}
+                        <td>{{ c.cat_name }}</td>
+                        {% endfor %}
                         <td>
                             {{ a.pst_description|truncatewords:10 }}
                         </td>
@@ -52,7 +54,7 @@ Admin
                             </a>
                         </td>
                         <td>
-                        <a href="#">
+                        <a href="{% url 'backend:delete_post' a.id %}">
                             <span class="fa fa-trash"></span>
                             Delete
                         </a>

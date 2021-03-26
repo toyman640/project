@@ -43,13 +43,13 @@ def post(request):
      return render(request, 'frontend/rent.html' )
 
 def post_from_cat(request, category_id):
-    count_post = PostPage.objects.filter(cat_id__id=category_id).count()
+    count_post = PostPage.objects.filter(category__id=category_id).count()
     try:
         get_cat_name = Category.objects.get(id=category_id)
     except ObjectDoesNotExist:
         return render(request, 'frontend/404.html')
     # get_cat_name = Category.objects.get(id=category_id)
-    post_cat= PostPage.objects.filter(cat_id__id=category_id)
+    post_cat= PostPage.objects.filter(category__id=category_id)
     context = {'posts': post_cat, 'counts': count_post, 'cat': get_cat_name}
     return render(request, 'frontend/post.html', context)
 

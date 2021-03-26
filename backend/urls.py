@@ -16,4 +16,7 @@ urlpatterns = [
     path('newpost-page/', views.addProp, name='addProp'),
     path('viewprofile-page/', views.viewProfile, name='viewProfile'),
     path('editpost-page/<int:blog_id>', views.postEdit, name='postEdit'),
+    path('edit-profile-page/', views.editUser, name='editUser'),
+    path('reset/', views.changePwrd, name='changePwrd'),
+    path('delete-property/<int:listf_id>', views.delete_post, name='delete_post'),
 ]

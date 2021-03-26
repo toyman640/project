@@ -14,7 +14,7 @@ Admin
         <li class="breadcrumb-item">
           <a href="#">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Edit Post</li>
+        <li class="breadcrumb-item active">Edit Profile</li>
       </ol>
 	  <!-- Icon Cards-->
       
@@ -22,12 +22,12 @@ Admin
 		<h2></h2>
 		<div class="box_general padding_bottom">
 			<div  class="form-group col-lg-6">
-        <form method="post" enctype="multipart/form-data">
-          {{ edit_key.as_p }}
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger">Save</button>
-        </form>
-      </div>
+                <form method="post" enctype="multipart/form-data">
+                  {{ edit_key.as_p }}
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">Save</button>
+                </form>
+              </div>
 		</div>
 	  </div>
 	  <!-- /.container-fluid-->
