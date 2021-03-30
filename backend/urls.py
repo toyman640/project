@@ -1,10 +1,11 @@
 from django.urls import path
+from django.conf.urls import url 
 from backend import views
 
 app_name = 'backend'
 
 urlpatterns = [
-    path('login', views.login_view, name='login_view'),
+    path('login/', views.login_view, name='login_view'),
     path('register-form/', views.register_form, name='register_form'),
     path('category/', views.category_form, name='category_form'),
     path('view_contact/', views.contact, name='contact'),
@@ -19,4 +20,5 @@ urlpatterns = [
     path('edit-profile-page/', views.editUser, name='editUser'),
     path('reset/', views.changePwrd, name='changePwrd'),
     path('delete-property/<int:listf_id>', views.delete_post, name='delete_post'),
+    path('userlist-page/', views.viewUsers, name='viewUsers'),
 ]

@@ -65,12 +65,21 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="{% url 'backend:dashboard' %}">
-            <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Dashboard</span>
-          </a>
-        </li>
+        {% if request.user.is_staff %}
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="{% url 'backend:dashboard' %}">
+              <i class="fa fa-fw fa-dashboard"></i>
+              <span class="nav-link-text">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="{% url 'backend:viewUsers' %}">
+              <i class="fa fa-fw fa-dashboard"></i>
+              <span class="nav-link-text">View Users</span>
+            </a>
+          </li>
+        {% endif %}
+        
 		    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Messages">
           <a class="nav-link" href="{% url 'backend:viewPost' %}">
             <i class="fa fa-list-alt"></i>
@@ -118,7 +127,7 @@
           <a class="nav-link" href="{% url 'index' %}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="{% url 'backend:login_view' %}">
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="{% url 'backend:logout_view' %}">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
       </ul>
@@ -151,7 +160,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="{% url 'backend:login_view' %}">Logout</a>
+          <a class="btn btn-primary" href="{% url 'backend:logout_view' %}">Logout</a>
         </div>
       </div>
     </div>

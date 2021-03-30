@@ -44,7 +44,7 @@
       <div class="site-mobile-menu-body"></div>
     </div> <!-- .site-mobile-menu -->
     {% if request.user.is_authenticated %}
-      <div class="site-navbar mt-4">
+    <div class="site-navbar mt-4">
           <div class="container py-1">
             <div class="row align-items-center">
               <div class="col-8 col-md-8 col-lg-4">
@@ -59,8 +59,7 @@
                     <li class="active">
                       <a href="{% url 'index' %}">Home</a>
                     </li>
-                    <!-- <li><a href="{% url 'frontend:buy' %}">Buy</a></li>
-                    <li><a href="{% url 'frontend:rent' %}">Rent</a></li> -->
+                   
                     {% for cat in category %}
                       <li><a href="{% url 'frontend:post_from_cat' cat.id %}">{{ cat.cat_name }}</a></li>
                     {% endfor %}

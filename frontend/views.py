@@ -3,11 +3,12 @@ from django.http import HttpResponse
 from frontend.models import *
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-
-
+from django.conf import settings
 from django.core import mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.contrib import messages
+from django.conf import settings
 
 # Create your views here.
 
@@ -28,7 +29,19 @@ def rent(request):
     return render(request, 'frontend/rent.html')
 
 def contact(request):
-    
+    if request.method == 'POST':
+        name = request.POST.get('fullname')
+        email = request.POST.get('email')
+        subject = 'Contact Us Form'
+        context = {'name': name, 'email':email,}
+        html_message = render_to_string('frontend/mail-template.html', context)
+        plain_message = strip_tags(html_message)
+        from_email = settings.FROM_EMAIL
+        email_var = mail.send_mail(subject, plain_message, from_email, ['falakoadebayor@gmail.com'])
+        if email_var:
+            messages.success(request, 'Email sent successfully')
+        else:
+            messages.error(request, 'Email not sent')
     return render(request, 'frontend/contact.html')
 
 # def login(request):

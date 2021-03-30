@@ -7,6 +7,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
 from frontend.models import *
+from django.http import HttpResponse
 
 # Create your views here.
 def register_form(request):
@@ -54,7 +55,7 @@ def login_view(request):
 def dashboard(request):
     return render(request, 'backend/dashboard.html')
 
-@login_required(login_url='/dashboard-page/')
+@login_required(login_url='/backend/login')
 def logout_view(request):
     logout(request)
     return redirect('backend:login_view')
@@ -87,7 +88,9 @@ def postEdit(request, blog_id):
 
 @login_required(login_url='/backend/login')
 def dashboard(request):
-    return render(request, 'backend/dashboard.html')
+    posts = PostPage.objects.all().count()
+    # categories = Category.objects.all().annotate(posts_count=Count('post'))
+    return render(request, 'backend/dashboard.html', {'post': posts})
 
 @login_required(login_url='/backend/login')
 def newPost(request):
@@ -139,7 +142,14 @@ def changePwrd(request):
         pass_form = PasswordChangeForm(user=request.user)
     return render(request, 'backend/reset.html', {'pass_key':pass_form})
 
+@login_required(login_url='/backend/login')
 def delete_post(request, listf_id):
     post_record = get_object_or_404(PostPage, id=listf_id)
     post_record.delete()
     return redirect('backend:viewPost')
+
+@login_required(login_url='/backend/login')
+def viewUsers(request):
+    users = User.objects.all().order_by('last_name')
+    post = PostPage.objects.filter(user=request.user).count()
+    return render(request, 'backend/users.html', {'user': users, 'post': post})
