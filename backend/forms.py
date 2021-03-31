@@ -108,7 +108,22 @@ class EditListing(forms.ModelForm):
 class NewPost(forms.ModelForm):
     class Meta():
         model = PostPage
+        fields = ['pst_image1','pst_image2','pst_image3','pst_image4','pst_image5','pst_title','pst_description','price','room','bath','toilet','category']
         exclude = ['user', 'm2mthroughfield']
+        widget = {
+            'pst_image1': forms.FileInput(attrs={'class': 'form-control'}),
+            'pst_image2': forms.FileInput(attrs={'class': 'form-control'}),
+            'pst_image3': forms.FileInput(attrs={'class': 'form-control'}),
+            'pst_image4': forms.FileInput(attrs={'class': 'form-control'}),
+            'pst_image5': forms.FileInput(attrs={'class': 'form-control'}),
+            'pst_title': forms.TextInput(attrs={'class': 'form-control'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'pst_desription': forms.Textarea(attrs={'class': 'form-control'}),
+            'toilet': forms.NumberInput(attrs={'class': 'form-control'}),
+            'bath': forms.NumberInput(attrs={'class': 'form-control'}),
+            'room': forms.NumberInput(attrs={'class': 'form-control'}),
+            'category' : forms.Select(attrs={'class': 'form-control'}),
+        }
         
 
 class UserEdit(forms.ModelForm):

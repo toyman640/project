@@ -21,7 +21,7 @@ Admin
 		<!-- /cards -->
 		<h2></h2>
 		<div class="box_general padding_bottom">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
           {{ prop.as_p }}
           {% csrf_token %}
           <button type="submit" class="btn btn-danger">Save</button>

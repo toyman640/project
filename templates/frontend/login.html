@@ -23,6 +23,7 @@ Login
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div>
+        <span><h6>forgot password? click <a href="{% url 'frontend:resetPage' %}">here!</a></h6></span>
         <button type="submit" class="btn btn-primary">Submit</button>
         <h6 class="text-right">new user?<a href="{% url 'backend:register_form' %}">sign up</a> </h6>
         {% csrf_token %}

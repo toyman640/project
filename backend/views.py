@@ -52,10 +52,6 @@ def login_view(request):
     return render(request, 'frontend/login.html')
 
 @login_required(login_url='/backend/login')
-def dashboard(request):
-    return render(request, 'backend/dashboard.html')
-
-@login_required(login_url='/backend/login')
 def logout_view(request):
     logout(request)
     return redirect('backend:login_view')
@@ -89,8 +85,8 @@ def postEdit(request, blog_id):
 @login_required(login_url='/backend/login')
 def dashboard(request):
     posts = PostPage.objects.all().count()
-    # categories = Category.objects.all().annotate(posts_count=Count('post'))
-    return render(request, 'backend/dashboard.html', {'post': posts})
+    categories = Category.objects.all()
+    return render(request, 'backend/dashboard.html', {'post': posts, 'cat': categories})
 
 @login_required(login_url='/backend/login')
 def newPost(request):
