@@ -8,6 +8,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
 from frontend.models import *
 from django.http import HttpResponse
+from frontend import views 
 
 # Create your views here.
 def register_form(request):
@@ -46,7 +47,7 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            return redirect('backend:dashboard')
+            return redirect('index')
         else:
             messages.error(request, 'Username and Password do not match')
     return render(request, 'frontend/login.html')

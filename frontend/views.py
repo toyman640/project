@@ -10,12 +10,13 @@ from django.utils.html import strip_tags
 from django.contrib import messages
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from backend.forms import *
 
 # Create your views here.
 
 def index(request):
-    
-    return render(request, 'frontend/index.html')
+    post_cat= PostPage.objects.all()[:4]
+    return render(request, 'frontend/index.html', {'counts':post_cat})
 
 def about(request):
     
@@ -79,4 +80,15 @@ def post_detail(request, abt_id):
 
 def resetPage(request):
     return render(request, 'frontend/resetpage.html')
+
+def temp(request):
+    if request.method == 'POST':
+        register_form = RegisterForm(request.POST)
+        if register_form.is_valid():
+            register_form.save()
+            # messages.success(request, 'Succesfully Registered')
+            return redirect('backend:login_view')
+    else:
+        register_form = RegisterForm() 
+    return render(request, 'frontend/front_temp.html',  {'reg': register_form})
     

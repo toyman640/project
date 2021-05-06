@@ -65,7 +65,12 @@
                     {% endfor %}
                     <li><a href="{% url 'frontend:about' %}">About</a></li>
                     <li><a href="{% url 'frontend:contact' %}">Contact</a></li>
+
+                  {% if request.user.is_staff %}
                     <li><a href="{% url 'backend:dashboard' %}">Dashboard</a></li>
+                  {% else %}
+                    <li><a href="{% url 'backend:viewPost' %}">Dashboard</a></li>
+                  {% endif %}
                   </ul>
                 </nav>
               </div>

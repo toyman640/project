@@ -49,16 +49,20 @@ Home
       <div class="row">
         <div class="col-12 mt-5">
           <h3 class="text-center mb-2">Latest Property</h3>
-          <div class="card-group">
-            <div class="card col-3 mr-3 border border-dark">
-              <img src="{% static 'frontend/images/hero_bg_1.jpg' %}" class="card-img-top" alt="...">
+          <div class="card-group" >
+            {% if counts %}
+            {% for d in counts %}
+            <div class="card col-3 mr-3 border border-dark" style="border-radius: 5px; box-shadow: 1px 1px 1px 1px;">
+              <img src="{{ d.post_img1 }}" class="card-img-top img-fluid" alt="...">
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">{{ d.pst_title }}</h5>
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
               </div>
             </div>
-            <div class="card col-3 mr-3 border border-dark">
+            {% endfor %}
+            {% endif %}
+            <!-- <div class="card col-3 mr-3 border border-dark">
               <img src="{% static 'frontend/images/hero_bg_1.jpg' %}" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Card title</h5>
@@ -81,7 +85,7 @@ Home
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
