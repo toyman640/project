@@ -15,7 +15,7 @@ from backend.forms import *
 # Create your views here.
 
 def index(request):
-    post_cat= PostPage.objects.all()[:4]
+    post_cat= PostPage.objects.all().order_by('-posted')[:4]
     return render(request, 'frontend/index.html', {'counts':post_cat})
 
 def about(request):
@@ -60,7 +60,7 @@ def post(request):
      return render(request, 'frontend/rent.html' )
 
 def post_from_cat(request, category_id):
-    count_post = PostPage.objects.filter(category__id=category_id)
+    count_post = PostPage.objects.filter(category__id=category_id).order_by('-posted')
     paginated_filter = Paginator(count_post, 6)
     page_number = request.GET.get('page')
     person_page_obj = paginated_filter.get_page(page_number)
@@ -69,7 +69,7 @@ def post_from_cat(request, category_id):
     except ObjectDoesNotExist:
         return render(request, 'frontend/404.html')
     # get_cat_name = Category.objects.get(id=category_id)
-    post_cat= PostPage.objects.filter(category__id=category_id)
+    post_cat= PostPage.objects.filter(category__id=category_id).order_by('-posted')
     context = {'person_page_obj': count_post, 'posts': post_cat, 'counts': count_post, 'cat': get_cat_name}
     context['person_page_obj'] = person_page_obj
     return render(request, 'frontend/post.html', context)

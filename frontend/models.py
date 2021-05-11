@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 # Create your models here.
 
 class UserInfo(models.Model):
@@ -49,6 +50,7 @@ class PostPage(models.Model):
     bath = models.IntegerField( null=True, verbose_name='Bathrooms')
     toilet = models.IntegerField( null=True, verbose_name='Toilet')
     category = models.ManyToManyField(Category, verbose_name='Offer type')
+    posted = models.DateTimeField(default = datetime.now)
 
     def __str__(self):
         return self.pst_title
