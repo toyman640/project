@@ -23,7 +23,7 @@ Admin
             <div class="card-body">
               <div class="mr-5"><h5>{{ post }} Properties Posted</h5></div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="messages.html">
+            <a class="card-footer text-white clearfix small z-1" href="{% url 'backend:allPosts' %}">
               <span class="float-left">View Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -31,11 +31,12 @@ Admin
             </a>
           </div>
         </div>
-        {% for q in cat %}
+        {% if category %}
+        {% for q in category %}
         <div class="col-xl-3 col-sm-6 mb-3">
           <div class="card dashboard text-white bg-warning o-hidden h-100">
             <div class="card-body">
-				<div class="mr-5"><h5>{{ q.posts.count }} in {{ q.cat_name }} category</h5></div>
+				<div class="mr-5"><h5>{{ q.posts_count }} in {{ q.cat_name }} category</h5></div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="reviews.html">
               <span class="float-left">View Details</span>
@@ -46,32 +47,7 @@ Admin
           </div>
         </div>
         {% endfor %}
-        <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card dashboard text-white bg-success o-hidden h-100">
-            <div class="card-body">
-              <div class="mr-5"><h5>3 in Rent category</h5></div>
-            </div>
-            <a class="card-footer text-white clearfix small z-1" href="bookings.html">
-              <span class="float-left">View Details</span>
-              <span class="float-right">
-                <i class="fa fa-angle-right"></i>
-              </span>
-            </a>
-          </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-3">
-          <div class="card dashboard text-white bg-danger o-hidden h-100">
-            <div class="card-body">
-              <div class="mr-5"><h5>0 in lease category</h5></div>
-            </div>
-            <a class="card-footer text-white clearfix small z-1" href="bookmarks.html">
-              <span class="float-left">View Details</span>
-              <span class="float-right">
-                <i class="fa fa-angle-right"></i>
-              </span>
-            </a>
-          </div>
-        </div>
+        {% endif %}
 		</div>
 		<!-- /cards -->
 		<h2></h2>

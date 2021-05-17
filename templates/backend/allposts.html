@@ -1,0 +1,71 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+<!Doctype html>
+{% block title %}
+Admin
+{% endblock %}
+
+{% block content %}
+  <!-- /Navigation -->
+  <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                <a href="#">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">My Dashboard</li>
+            </ol>
+            <!-- Icon Cards-->
+                
+            <!-- /cards -->
+            <h2></h2>
+            <div class="box_general padding_bottom">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Property type</th>
+                        <th>Property Prize</th>
+                        <th>Property Category</th>
+                        <th>Property Description</th>
+                        <th colspan="3">Action</th>
+                    </tr>
+                    {% if pst %}
+                    {% for a in pst %}
+                        <tr>
+                            <td>{{ a.pst_title }}</td>
+                            <td>{{ a.price }}</td>
+                            {% for c in a.category.all %}
+                            <td>{{ c.cat_name }}</td>
+                            {% endfor %}
+                            <td>
+                                {{ a.pst_description|truncatewords:10 }}
+                            </td>
+                            <td>
+                                <a href="{% url 'backend:postEdit' a.id %}">
+                                <span class="fa fa-pencil"></span>
+                                Edit
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url 'backend:detailView' a.id %}">
+                                <span class="fa fa-eye"></span>
+                                View
+                                </a>
+                            </td>
+                            <td>
+                            <a href="{% url 'backend:delete_post' a.id %}">
+                                <span class="fa fa-trash"></span>
+                                Delete
+                            </a>
+                            </td>
+                            
+                        </tr>
+                    {% endfor %}
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+	  <!-- /.container-fluid-->
+  </div>
+    
+{% endblock %}  

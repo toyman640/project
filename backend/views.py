@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from frontend.models import *
 from django.http import HttpResponse
 from frontend import views 
+from django.db.models import Count
 
 # Create your views here.
 def register_form(request):
@@ -86,8 +87,8 @@ def postEdit(request, blog_id):
 @login_required(login_url='/backend/login')
 def dashboard(request):
     posts = PostPage.objects.all().count()
-    categories = Category.objects.all()
-    return render(request, 'backend/dashboard.html', {'post': posts, 'cat': categories})
+    categories = Category.objects.all().annotate(posts_count=Count('postpage'))
+    return render(request, 'backend/dashboard.html', {'post': posts, 'category': categories})
 
 @login_required(login_url='/backend/login')
 def newPost(request):
@@ -148,5 +149,10 @@ def delete_post(request, listf_id):
 @login_required(login_url='/backend/login')
 def viewUsers(request):
     users = User.objects.all().order_by('last_name')
-    post = PostPage.objects.filter(user=request.user).count()
+    post = PostPage.objects.filter(user=request.user)
     return render(request, 'backend/users.html', {'user': users, 'post': post})
+
+@login_required(login_url='/backend/login')
+def allPosts(request):
+    posts = PostPage.objects.all()
+    return render(request, 'backend/allposts.html', {'pst': posts})

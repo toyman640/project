@@ -21,4 +21,5 @@ urlpatterns = [
     path('reset/', views.changePwrd, name='changePwrd'),
     path('delete-property/<int:listf_id>', views.delete_post, name='delete_post'),
     path('userlist-page/', views.viewUsers, name='viewUsers'),
+    path('allpost-page/', views.allPosts, name='allPosts'),
 ]
