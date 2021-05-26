@@ -91,4 +91,12 @@ def temp(request):
     else:
         register_form = RegisterForm() 
     return render(request, 'frontend/front_temp.html',  {'reg': register_form})
+
+def searchPage(request):
+    if request.method == "GET":
+        searched = request.GET('searched')
+        return render(request, 'frontend/search-result.html', {'searched': searched})
+    else:
+
+        return render(request, 'frontend/search-result.html')
     
