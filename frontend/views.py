@@ -93,9 +93,10 @@ def temp(request):
     return render(request, 'frontend/front_temp.html',  {'reg': register_form})
 
 def searchPage(request):
-    if request.method == "GET":
-        searched = request.GET('searched')
-        return render(request, 'frontend/search-result.html', {'searched': searched})
+    if request.method == "POST":
+        searched = request.POST['searched']
+        post = PostPage.objects.filter(pst_title__contains=searched)
+        return render(request, 'frontend/search-result.html', {'searched': searched, 'pst':post})
     else:
 
         return render(request, 'frontend/search-result.html')
