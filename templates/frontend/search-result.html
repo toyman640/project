@@ -145,6 +145,11 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     {% if searched %}
                         <h2 class="text-dark">You searched for {{ searched }}</h2>
+                        <br>
+                        {% for p in pst %}
+                         <h1>{{ p.pst_title}}</h1>
+                         <p>{{ p.pst_description }}</p>
+                        {% endfor %}
                     {% endif %}
                     <!-- <div class="property-entry h-100">
                     <a href="" class="property-thumbnail">
