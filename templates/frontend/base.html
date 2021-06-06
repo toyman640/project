@@ -54,20 +54,24 @@
                 <nav class="site-navigation text-right text-md-right" role="navigation">
 
                   <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
-
+                    {% url 'index' as Home %}
+                    {% url 'frontend:post_from_cat' as Rent %}
+                    {% url 'frontend:about' as About %}
+                    {% url 'frontend:contact' as Contact %}
+                    {% url 'backend:dashboard' as Dashboard %}
                   <ul class="site-menu js-clone-nav d-none d-lg-block">
-                    <li class="active">
+                    <li {% if request.path == Home %} class="active" {% endif %}>
                       <a href="{% url 'index' %}">Home</a>
                     </li>
                    
                     {% for cat in category %}
-                      <li><a href="{% url 'frontend:post_from_cat' cat.id %}">{{ cat.cat_name }}</a></li>
+                      <li {% if request.path == Rent %} class="active" {% endif %}><a href="{% url 'frontend:post_from_cat' cat.id %}">{{ cat.cat_name }}</a></li>
                     {% endfor %}
-                    <li><a href="{% url 'frontend:about' %}">About</a></li>
-                    <li><a href="{% url 'frontend:contact' %}">Contact</a></li>
+                    <li {% if request.path == About %} class="active" {% endif %}><a href="{% url 'frontend:about' %}">About</a></li>
+                    <li {% if request.path == Contact %} class="active" {% endif %}><a href="{% url 'frontend:contact' %}">Contact</a></li>
 
                   {% if request.user.is_staff %}
-                    <li><a href="{% url 'backend:dashboard' %}">Dashboard</a></li>
+                    <li {% if request.path == Dashboard %} class="active" {% endif %}><a href="{% url 'backend:dashboard' %}">Dashboard</a></li>
                   {% else %}
                     <li><a href="{% url 'backend:viewPost' %}">Dashboard</a></li>
                   {% endif %}
@@ -89,18 +93,24 @@
 
                 <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
 
+                {% url 'index' as Home %}
+                {% url 'frontend:post_from_cat' as Rent %}
+                {% url 'frontend:about' as About %}
+                {% url 'frontend:contact' as Contact %}
+                {% url 'backend:login_view' as Login %}
+
                 <ul class="site-menu js-clone-nav d-none d-lg-block">
-                  <li class="active">
+                  <li {% if request.path == Home %} class="active" {% endif %}>
                     <a href="{% url 'index' %}">Home</a>
                   </li>
                   <!-- <li><a href="{% url 'frontend:buy' %}">Buy</a></li>
                   <li><a href="{% url 'frontend:rent' %}">Rent</a></li> -->
                   {% for cat in category %}
-                    <li><a href="{% url 'frontend:post_from_cat' cat.id %}">{{ cat.cat_name }}</a></li>
+                    <li {% if request.path == Rent %} class="active" {% endif %}><a href="{% url 'frontend:post_from_cat' cat.id %}">{{ cat.cat_name }}</a></li>
                   {% endfor %}
-                  <li><a href="{% url 'frontend:about' %}">About</a></li>
-                  <li><a href="{% url 'frontend:contact' %}">Contact</a></li>
-                  <li><a href="{% url 'backend:login_view' %}">Login</a></li>
+                  <li {% if request.path == About %} class="active" {% endif %}><a href="{% url 'frontend:about' %}">About</a></li>
+                  <li {% if request.path == Contact %} class="active" {% endif %}><a href="{% url 'frontend:contact' %}">Contact</a></li>
+                  <li {% if request.path == Login %} class="active" {% endif %}><a href="{% url 'backend:login_view' %}">Login</a></li>
                 </ul>
               </nav>
             </div>
@@ -156,8 +166,8 @@
                   <input type="text" name="searched">
                 </div>
               </div>
-              <!-- <div class="col-md-3">
-                <label for="offer-types">Offer Type(sale or rent)</label>
+              <div class="col-md-3">
+                <label for="offer-types">Offer Type(sale/rent/lease)</label>
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
@@ -171,9 +181,9 @@
               <div class="col-md-3">
                 <label for="select-city">Max. price</label>
                 <div class="select-wrap">
-                  <input type="number">
+                  <input type="number" name="price">
                 </div>
-              </div> -->
+              </div>
               <div class="col-md-3">
                 <input type="submit" class="btn btn-success text-white btn-block rounded-0" value="Search">
               </div>

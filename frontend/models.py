@@ -51,6 +51,8 @@ class PostPage(models.Model):
     toilet = models.IntegerField( null=True, verbose_name='Toilet')
     category = models.ManyToManyField(Category, verbose_name='Offer type')
     posted = models.DateTimeField(default = datetime.now)
+    featured = models.BooleanField(blank=True)
+    sponsored = models.BooleanField(blank=True)
 
     def __str__(self):
         return self.pst_title

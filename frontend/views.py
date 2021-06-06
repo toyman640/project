@@ -15,8 +15,10 @@ from backend.forms import *
 # Create your views here.
 
 def index(request):
+    sponsored = PostPage.objects.filter(sponsored=True)[:4]
+    featured = PostPage.objects.filter(featured=True)[:4]
     post_cat= PostPage.objects.all().order_by('-posted')[:4]
-    return render(request, 'frontend/index.html', {'counts':post_cat})
+    return render(request, 'frontend/index.html', {'counts':post_cat, 'sponsored':sponsored, 'featured':featured})
 
 def about(request):
     

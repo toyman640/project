@@ -2,7 +2,9 @@
 {% load static %}
 <!Doctype html>
 {% block title %}
-  Rent
+  {% for c in p.category.all %}
+      {{ c.cat_name }}
+  {% endfor %}
 {% endblock %}
 
 {% block content %}
