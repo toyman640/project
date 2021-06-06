@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from backend.forms import *
+from .filters import PostFilter
 
 # Create your views here.
 
