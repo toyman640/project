@@ -23,7 +23,7 @@ urlpatterns = [
     # path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     # path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     # path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
-    path('result-page/', views.searchPage, name='searchPage'),
+    path('result-page/', views.filter_data, name='filter_data'),
 
     
 ]

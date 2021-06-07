@@ -12,6 +12,7 @@ from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from backend.forms import *
 from .filters import PostFilter
+from backend.forms import *
 
 # Create your views here.
 
@@ -19,11 +20,27 @@ def index(request):
     sponsored = PostPage.objects.filter(sponsored=True)[:4]
     featured = PostPage.objects.filter(featured=True)[:4]
     post_cat= PostPage.objects.all().order_by('-posted')[:4]
-    return render(request, 'frontend/index.html', {'counts':post_cat, 'sponsored':sponsored, 'featured':featured})
+    query_form = FilterForm()
+    return render(request, 'frontend/index.html', {'counts':post_cat, 'sponsored':sponsored, 'featured':featured, 'qf':query_form})
 
 def about(request):
     
     return render(request, 'frontend/about.html')
+
+def filter_data(request):
+    if request.method == 'GET':
+        query_form = FilterForm(request.GET)
+        if query_form.is_valid():
+            print('Correct')
+            price = query_form.cleaned_data.get('price')
+            pst_title = query_form.cleaned_data.get('pst_title')
+            category = query_form.cleaned_data.get('category')
+            post = PostPage.objects.all()
+            query = PostPage.objects.filter(category=category,price=price, pst_title=pst_title)
+            return render(request, 'frontend/search-result.html', {'q': query})
+        else:
+            print('Not found')
+            return render(request, 'frontend/search-result.html')
 
 def buy(request):
     
@@ -95,12 +112,12 @@ def temp(request):
         register_form = RegisterForm() 
     return render(request, 'frontend/front_temp.html',  {'reg': register_form})
 
-def searchPage(request):
-    if request.method == "POST":
-        searched = request.POST['searched']
-        post = PostPage.objects.filter(pst_title__contains=searched)
-        return render(request, 'frontend/search-result.html', {'searched': searched, 'pst':post})
-    else:
+# def searchPage(request):
+#     if request.method == "POST":
+#         searched = request.POST['searched']
+#         post = PostPage.objects.filter(pst_title__contains=searched)
+#         return render(request, 'frontend/search-result.html', {'searched': searched, 'pst':post})
+#     else:
 
-        return render(request, 'frontend/search-result.html')
+#         return render(request, 'frontend/search-result.html')
     

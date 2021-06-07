@@ -117,7 +117,7 @@ class NewPost(forms.ModelForm):
             'pst_image4': forms.FileInput(attrs={'class': 'form-control'}),
             'pst_image5': forms.FileInput(attrs={'class': 'form-control'}),
             'pst_title': forms.TextInput(attrs={'class': 'form-control'}),
-            'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'price': forms.TextInput(attrs={'class': 'form-control'}),
             'pst_desription': forms.Textarea(attrs={'class': 'form-control'}),
             'toilet': forms.NumberInput(attrs={'class': 'form-control'}),
             'bath': forms.NumberInput(attrs={'class': 'form-control'}),
@@ -149,3 +149,113 @@ class PasswordChangeForm(PasswordChangeForm):
             user.save()
             return user
 
+
+class FilterForm(forms.ModelForm):
+    SALE = "1"
+    RENT = "2"
+    LEASE = "3"
+    CHOOSE = ""
+
+    OFFER_TYPE = [
+        (SALE, 'Buy'),
+        (RENT, 'Rent'),
+        (LEASE, 'lease'),
+        (CHOOSE, 'Offer Type')
+
+    ]
+
+
+    BUNGALOW = "Mansion"
+    DUPLEX = "Duplex"
+    FLAT = "Flat"
+    GLASSHOUSE = "Glasshouse"
+    STORY_BUILDING = "Story Building"
+    CHOOSE = ""
+
+    PROPERTY_TYPE = [
+
+        (BUNGALOW, 'Mansion'),
+        (DUPLEX, 'Duplex'),
+        (FLAT, 'Flat'),
+        (GLASSHOUSE, 'Glass House'),
+        (STORY_BUILDING, 'Story Building'),
+        (CHOOSE, 'Property Type')
+
+    ]
+
+    ONE = "100,000"
+    TWO = "150,00"
+    THREE = "200,000"
+    FOUR = "250,000"
+    FIVE = "300,000"
+    SIX = "350,000"
+    SEVEN = "400,000"
+    EIGHT = "450,000"
+    NINE = "500,000"
+    TEN = "550,000"
+    ONE1 = "600,000"
+    TWO2 = "650,000"
+    THREE3 = "700,000"
+    FOUR4 = "750,000"
+    FIVE5 = "800,000"
+    SIX6 = "10,000,000"
+    SEVEN7 = "40,000,000"
+    EIGHT8 = "950,000"
+    NINE9 = "1 Million"
+    TEN10 = "1.5 Million"
+    ONE11 = "2 Million"
+    TWO22 = "2.5 Million"
+    THREE33 = "3 Million"
+    FOUR44 = "3.5 Million"
+    FIVE55 = "4 Million"
+    SIX66 = "4.5 Million"
+    SEVEN77= "5 Million"    
+    CHOOSE = ""
+
+    PRICE= [
+         (ONE, ' 100,000'),
+         (TWO, ' 150,000'),
+         (THREE, ' 200,000'),
+         (FOUR, ' 250,000'),
+         (FIVE, ' 300,000'),
+         (SIX, ' 350,000'),
+         (SEVEN, ' 400,000'),
+         (EIGHT, ' 450,000'),
+         (NINE, ' 500,000'),
+         (TEN, ' 550,000'),
+         (ONE1, ' 600,000'),
+         (TWO2, ' 650,000'),
+         (THREE3, ' 700,000'),
+         (FOUR4, ' 750,000'),
+         (FIVE5, ' 800,000'),
+         (SIX6, ' 10,000,000'),
+         (SEVEN7, ' 40,000,000'),
+         (EIGHT8, ' 950,000'),
+         (NINE9, ' 1 Million'),
+         (TEN10, ' 1.5 Million'),
+         (ONE11, ' 2 Million'),
+         (TWO22, ' 2.5 Million'),
+         (THREE33, ' 3 Million'),
+         (FOUR44, ' 3.5 Million'),
+         (FIVE55, ' 4 Million'),
+         (SIX66, ' 4.5 Million'),
+         (SEVEN77, ' 5 Million'),
+         (CHOOSE, 'Price')
+    ]
+
+    price = forms.CharField(required=False, label='Price*', widget=forms.Select(choices=PRICE,
+        attrs={'class': 'form-control', 'placeholder': 'Price'}))
+
+    pst_title = forms.CharField(required=False, label='Property Type*', widget=forms.Select(choices=PROPERTY_TYPE,
+        attrs={'class': 'form-control', 'placeholder': 'Property Type'}))
+
+    category = forms.CharField(required=False, label='Offer Type*', widget=forms.Select(choices=OFFER_TYPE,
+        attrs={'class': 'form-control', 'placeholder': 'Offer Type'}))
+
+    # user = forms.ModelChoiceField(
+    #     queryset=User.objects.all(), empty_label='Please Choose',
+    #     widget=forms.Select(attrs={'class': 'form-control'}))
+   
+    class Meta():
+        fields = ['pst_title', 'category', 'price']
+        model = PostPage

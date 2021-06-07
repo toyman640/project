@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from frontend import views
+from backend.views import activation_sent_view, activate
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -28,6 +29,8 @@ urlpatterns = [
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name='frontend/password_reset_sent.html'), name='password_reset_done'),
     path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='frontend/password_reset_done.html'), name='password_reset_complete'),
+    path('sent/', activation_sent_view, name="activation_sent"),
+    path('activate/<slug:uidb64>/<slug:token>/', activate, name='activate'),
     path('admin/', admin.site.urls),
 ]
 

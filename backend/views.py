@@ -11,18 +11,55 @@ from django.http import HttpResponse
 from frontend import views 
 from django.db.models import Count
 
+
 # Create your views here.
 def register_form(request):
     if request.method == 'POST':
         register_form = RegisterForm(request.POST)
         if register_form.is_valid():
-            register_form.save()
+            user = register_form.save()
+            user.refresh_from_db()
+            user.userinfo.first_name = register_form.cleaned_data.get('first_name')
+            user.userinfo.last_name = register_form.cleaned_data.get('last_name')
+            user.userinfo.email = register_form.cleaned_data.get('email')
+            user.is_active = False
+            user.save()
+            current_site = get_current_site(request)
+            subject = 'Galaxy Please Activate Your Account'
+            message = render_to_string('backend/activation_request.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user),
+            })
+            user.email_user(subject, message)
             # messages.success(request, 'Succesfully Registered')
             return redirect('backend:login_view')
     else:
         register_form = RegisterForm() 
         
     return render(request, 'frontend/signup.html', {'reg': register_form})
+
+def activation_sent_view(request):
+    return render(request, 'backend/activation_sent.html')
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = UserInfo.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, UserInfo.DoesNotExist):
+        user = None
+    # checking if the user exists, if the token is valid.
+    if user is not None and account_activation_token.check_token(user, token):
+        # if valid set active true
+        user.is_active = True
+        # set signup_confirmation true
+        user.userinfo.signup_confirmation = True
+        user.save()
+        login(request, user)
+        return redirect('backend:login_view')
+    else:
+        return render(request, 'backend/activation_invalid.html')
 
 def category_form(request):
     if request.method=='POST':

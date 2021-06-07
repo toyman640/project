@@ -141,57 +141,22 @@
 
     <div class="site-section site-section-sm pb-0">
       <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-lg-4 mb-4">
-                    {% if q %}
-                        <br>
-                        {% for p in q %}
-                         <h1>{{ p.pst_title}}</h1>
-                         <p>{{ p.pst_description }}</p>
-                         <div>
-                          <img src="{{ p.post_img1 }}" alt="Image" class="img-fluid">
-                         </div>
-                        {% endfor %}
-                    {% endif %}
-                    <!-- <div class="property-entry h-100">
-                    <a href="" class="property-thumbnail">
-                        <div class="offer-type-wrap">
-                        {% for c in p.category.all %}
-                                <span class="offer-type bg-success">{{ c.cat_name }}</span>
-                        {% endfor %}
-                        </div>
-                        <img src="{{ p.post_img1 }}" alt="Image" class="img-fluid">
-                    </a>
-                    <div class="p-4 property-body">
-                        <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-                        <h2 class="property-title"><a href="">{{ p.pst_title }}</a></h2>
-                        <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span>{{ p.pst_description }}</span>
-                        <strong class="property-price text-primary mb-3 d-block text-success">{{p.price}}</strong>
-                        <ul class="property-specs-wrap mb-3 mb-lg-0">
-                        <li>
-                            <span class="property-specs">Rooms</span>
-                            <span class="property-specs-number">{{ p.room }}</span>
-                            
-                        </li>
-                        <li>
-                            <span class="property-specs">Bathrooms</span>
-                            <span class="property-specs-number">{{ p.bath }}</span>
-                            
-                        </li>
-                        <li>
-                            <span class="property-specs">Toilet</span>
-                            <span class="property-specs-number">{{ p.toilet }}</span>
-                            
-                        </li>
-                        </ul>
-    
-                    </div>
-                    </div> -->
-                </div>
-            </div>   
+        <div class="row">
+            <!-- <form class="form" method="post">
+                {{ reg }}
+                {{ photo.as_p }}
+
+                {% csrf_token %}
+                <input type="submit" value="Sign up">
+            </form> -->
+        </div>  
+       
       </div>
     </div>
 
+    {% block content %}
+    
+      {% endblock %}
     <footer class="site-footer">
         <div class="container">
           <div class="row">

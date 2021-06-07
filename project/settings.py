@@ -64,8 +64,8 @@ EMAIL_HOST_USER = 'falakoadebayor@gmail.com'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-FROM_EMAIL = 'falakoadebayor@gmail.com'
-EMAIL_HOST_PASSWORD = 'omotoyosi19640'
+FROM_EMAIL = 'homelandweb640'
+EMAIL_HOST_PASSWORD = 'yusrulmay28'
 
 TEMPLATES = [
     {
