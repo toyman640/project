@@ -7,8 +7,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 # Create your models here.
 
-class UserInfo(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100, verbose_name='First name')
     last_name = models.CharField(max_length=100, verbose_name='Last name')
     email = models.CharField(max_length=100, verbose_name='Email')
@@ -17,9 +17,10 @@ class UserInfo(models.Model):
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
-     if created:
-        UserInfo.object.create(user=instance)
-        instance.userinfo.save()
+    try:
+        instance.profile.save()
+    except ObjectDoesNotExist:
+        Profile.objects.create(user=instance)
 
 
 

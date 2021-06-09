@@ -10,6 +10,14 @@ from frontend.models import *
 from django.http import HttpResponse
 from frontend import views 
 from django.db.models import Count
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_decode
+from django.db import IntegrityError
+from django.utils.encoding import force_bytes
+from .tokens import account_activation_token
+from django.utils.encoding import force_text
+from django.utils.http import urlsafe_base64_encode
 
 
 # Create your views here.
@@ -19,9 +27,9 @@ def register_form(request):
         if register_form.is_valid():
             user = register_form.save()
             user.refresh_from_db()
-            user.userinfo.first_name = register_form.cleaned_data.get('first_name')
-            user.userinfo.last_name = register_form.cleaned_data.get('last_name')
-            user.userinfo.email = register_form.cleaned_data.get('email')
+            user.profile.first_name = register_form.cleaned_data.get('first_name')
+            user.profile.last_name = register_form.cleaned_data.get('last_name')
+            user.profile.email = register_form.cleaned_data.get('email')
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
@@ -46,15 +54,15 @@ def activation_sent_view(request):
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
-        user = UserInfo.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, UserInfo.DoesNotExist):
+        user = Profile.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, Profile.DoesNotExist):
         user = None
     # checking if the user exists, if the token is valid.
     if user is not None and account_activation_token.check_token(user, token):
         # if valid set active true
         user.is_active = True
         # set signup_confirmation true
-        user.userinfo.signup_confirmation = True
+        user.profile.signup_confirmation = True
         user.save()
         login(request, user)
         return redirect('backend:login_view')
