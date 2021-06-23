@@ -8,6 +8,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
 from frontend.models import *
 from django.http import HttpResponse
+from django.contrib import messages
 from frontend import views 
 from django.db.models import Count
 from django.contrib.sites.shortcuts import get_current_site
@@ -33,7 +34,7 @@ def register_form(request):
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
-            subject = 'Galaxy Please Activate Your Account'
+            subject = 'Homeland Properties Account activation'
             message = render_to_string('backend/activation_request.html', {
                 'user': user,
                 'domain': current_site.domain,
@@ -41,8 +42,8 @@ def register_form(request):
                 'token': account_activation_token.make_token(user),
             })
             user.email_user(subject, message)
-            # messages.success(request, 'Succesfully Registered')
-            return redirect('backend:login_view')
+            messages.success(request, 'Log in your mail to activate account')
+            return redirect('backend:register_form')
     else:
         register_form = RegisterForm() 
         
@@ -54,7 +55,7 @@ def activation_sent_view(request):
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
-        user = Profile.objects.get(pk=uid)
+        user = User.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, Profile.DoesNotExist):
         user = None
     # checking if the user exists, if the token is valid.
@@ -141,8 +142,8 @@ def newPost(request):
 
 @login_required(login_url='/backend/login')
 def viewProfile(request):
-    profile = UserInfo.objects.filter(user=request.user)
-    img =  UserProfile.objects.all()
+    profile = Profile.objects.filter(user=request.user)
+    img =  Profile.objects.all()
     return render(request, 'backend/viewprofile.html',{'profile':profile, 'img':img})
 
 @login_required(login_url='/backend/login')
@@ -154,8 +155,8 @@ def addProp(request):
             prop.user = request.user
             prop.save()
             list_form.save_m2m()
-            # messages.success(request, 'Hotel Posted')
-            # return redirect('backend:addProp')
+            messages.success(request, 'Hotel Posted')
+            return redirect('backend:viewPost')
             
     else:
         list_form = NewPost()

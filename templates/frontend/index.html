@@ -9,23 +9,22 @@ Home
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <form method="GET" class="form-inline"  action="{% url 'frontend:filter_data'%}" >
-            <div class="row col-lg-12" style="background-color:#bbbb; opacity:0.1px; padding-top:50px; padding-bottom: 50px;">
-              <div class="form-group col-sm-10 col-lg-3">
-                {{ qf.pst_title }}
-              </div>
-              <div class="form-group col-sm-10 col-lg-3">
-                {{ qf.category }}
-              </div>
-              <div class="form-group col-sm-10 col-lg-3">
-                {{ qf.price }}
-              </div>
-              <div class="col-md-3 col-sm-10 col-lg-3 style=" border-radius: 20px; padding-top:10px;">
-                <input type="submit" class="btn btn-primary" value="Filter">
-              </div>
-            </div>
-            
-          </form>
+            <form method="GET" class="form-inline"  action="{% url 'frontend:filter_data'%}">
+              <div class="row col-lg-12 bg-secondary" style="position: absolute; margin-bottom: 100px;height: 150px; z-index: 1000; border-radius: 5px solid red;">
+                <div class="form-group col-sm-10 col-lg-4">
+                  {{ qf.pst_title }}
+                </div>
+                <div class="form-group col-sm-10 col-lg-4">
+                  {{ qf.category }}
+                </div>
+                <div class="form-group col-sm-10 col-lg-4">
+                  {{ qf.price }}
+                </div>
+                <div class="col-md-3 col-sm-10 col-lg-3">
+                  <input type="submit" class="btn btn-primary" value="Search">
+                </div>
+              </div> 
+            </form>
         </div> 
         <div class="col-12 mt-5">
           <h3 class="text-center mb-2">Latest property</h3>
@@ -138,11 +137,11 @@ Home
           <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
             <div class="team-member">
 
-              <img src="{% static 'frontend/images/person_1.jpg' %}" alt="Image" class="img-fluid rounded mb-4">
+              <img src="{% static 'frontend/images/sell1.jpg' %}" alt="Image" class="img-fluid rounded mb-4">
 
               <div class="text">
 
-                <h2 class="mb-2 font-weight-light text-black h4">Megan Smith</h2>
+                <h2 class="mb-2 font-weight-light text-black h4">Leke Cash</h2>
                 <span class="d-block mb-3 text-white-opacity-05">Real Estate Agent</span>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi dolorem totam non quis facere blanditiis praesentium est. Totam atque corporis nisi, veniam non. Tempore cupiditate, vitae minus obcaecati provident beatae!</p>
                 <p>
@@ -158,11 +157,11 @@ Home
           <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
             <div class="team-member">
 
-              <img src="{% static 'frontend/images/person_2.jpg' %}" alt="Image" class="img-fluid rounded mb-4">
+              <img src="{% static 'frontend/images/sell2.jpg' %}" alt="Image" class="img-fluid rounded mb-4">
 
               <div class="text">
 
-                <h2 class="mb-2 font-weight-light text-black h4">Brooke Cagle</h2>
+                <h2 class="mb-2 font-weight-light text-black h4">Toyo Shell</h2>
                 <span class="d-block mb-3 text-white-opacity-05">Real Estate Agent</span>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, cumque vitae voluptates culpa earum similique corrupti itaque veniam doloribus amet perspiciatis recusandae sequi nihil tenetur ad, modi quos id magni!</p>
                 <p>

@@ -142,12 +142,18 @@
     <div class="site-section site-section-sm pb-0">
       <div class="container">
         <div class="row">
+          
             <form class="form" method="post">
+              {% if messages %}
+                  {% for mes in messages %}
+                    <div class="alert {{ mes.tags }}">{{ mes }}</div>
+                  {% endfor %}
+                {% endif %}
                 {{ reg }}
                 {{ photo.as_p }}
 
                 {% csrf_token %}
-                <input type="submit" value="Sign up">
+                <input type="submit" value="Sign up" class="mt-4 mb-3">
             </form>
         </div>  
        

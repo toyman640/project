@@ -21,6 +21,11 @@ Admin
 		<!-- /cards -->
 		<h2></h2>
 		<div class="box_general padding_bottom">
+      {% if messages %}
+      {% for m in messages %}
+        <div class="alert {{ m.tags }}">{{ m }}</div>
+      {% endfor %}
+      {% endif %}
         <form method="post" enctype="multipart/form-data">
           {{ prop.as_p }}
           {% csrf_token %}

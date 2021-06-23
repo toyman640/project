@@ -11,15 +11,15 @@ from django.contrib.auth.forms import PasswordChangeForm
 class RegisterForm(UserCreationForm):
     username = forms.CharField(label='Username*', widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Enter Username'}))
-    email = forms.EmailField(label='Email*',
+    email = forms.EmailField(label='Email',
                              widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter Email'}))
     first_name = forms.CharField(required=False, widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Enter Firstname'}))
     last_name = forms.CharField(required=False, widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Enter Lastname'}))
-    password1 = forms.CharField(label='Enter Password*', widget=forms.PasswordInput(
+    password1 = forms.CharField(label='Enter Password', widget=forms.PasswordInput(
         attrs={'class': 'form-control', 'placeholder': 'Enter Password'}))
-    password2 = forms.CharField(label='Confirm Password*', widget=forms.PasswordInput(
+    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput(
         attrs={'class': 'form-control', 'placeholder': 'Enter Password'}))
     botfield = forms.CharField(required=False, widget=forms.HiddenInput(),
                                validators=[validators.MaxLengthValidator(0)])
@@ -108,7 +108,7 @@ class EditListing(forms.ModelForm):
 class NewPost(forms.ModelForm):
     class Meta():
         model = PostPage
-        fields = ['pst_image1','pst_image2','pst_image3','pst_image4','pst_image5','pst_title','pst_description','price','room','bath','toilet','category']
+        fields = ['pst_image1','pst_image2','pst_image3','pst_image4','pst_image5','pst_title','pst_description','price','room','bath','toilet','category','sponsored','featured',]
         exclude = ['user', 'm2mthroughfield']
         widget = {
             'pst_image1': forms.FileInput(attrs={'class': 'form-control'}),
@@ -177,19 +177,19 @@ class FilterForm(forms.ModelForm):
         (BUNGALOW, 'Mansion'),
         (DUPLEX, 'Duplex'),
         (FLAT, 'Flat'),
-        (GLASSHOUSE, 'Glass House'),
-        (STORY_BUILDING, 'Story Building'),
+        (GLASSHOUSE, 'Duplex'),
+        (STORY_BUILDING, 'Block of flat'),
         (CHOOSE, 'Property Type')
 
     ]
 
-    ONE = "100,000"
-    TWO = "150,00"
-    THREE = "200,000"
-    FOUR = "250,000"
-    FIVE = "300,000"
+    ONE = "250,000"
+    TWO = "150,000,000"
+    THREE = "40,000,000"
+    FOUR = "1,200,000,000"
+    FIVE = "10,200,000"
     SIX = "350,000"
-    SEVEN = "400,000"
+    SEVEN = "13,5000,000"
     EIGHT = "450,000"
     NINE = "500,000"
     TEN = "550,000"
@@ -213,11 +213,11 @@ class FilterForm(forms.ModelForm):
     CHOOSE = ""
 
     PRICE= [
-         (ONE, ' 100,000'),
-         (TWO, ' 150,000'),
-         (THREE, ' 200,000'),
-         (FOUR, ' 250,000'),
-         (FIVE, ' 300,000'),
+         (ONE, ' 250,000'),
+         (TWO, ' 150,000,000'),
+         (THREE, ' 40,000,000'),
+         (FOUR, ' 1,200,000,000'),
+         (FIVE, ' 10,200,000'),
          (SIX, ' 350,000'),
          (SEVEN, ' 400,000'),
          (EIGHT, ' 450,000'),
