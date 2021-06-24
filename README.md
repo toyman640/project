@@ -1,0 +1,2 @@
+To run this project on your local host, the packages installed are in the requirements.txt file.
+To install text packages just enter and run the commmand "pip install requirements.txt" on your terminal.
